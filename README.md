@@ -1,2 +1,3 @@
 # test-actions-go
-Simple test with got and github actions
+
+Simple test with Go and Github Actions.
