@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 	"testing"
+	"time"
 )
 
 func TestGetCurrentOS(t *testing.T) {
@@ -25,5 +26,18 @@ func TestGetCurrentOS(t *testing.T) {
 		t.Logf("OK: Expected system: %s, detected: %s", envOS, currentOS)
 	} else {
 		t.Errorf("FAIL: System detected as %s", envOS)
+	}
+}
+
+func TestGorutine(t *testing.T) {
+	// Create a channel
+	channel := make(chan bool)
+	go simpleWait(channel)
+
+	select {
+	case <-channel:
+		t.Logf("OK: gorutine ended as expected")
+	case <-time.After(10 * time.Second):
+		t.Errorf("FAIL: reached gorutine waiting timeout")
 	}
 }
